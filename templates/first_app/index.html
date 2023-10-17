@@ -1,0 +1,29 @@
+{% extends 'first_app/base.html' %}
+
+{% block body_block %}
+<h1> List of Musicians: </h1>
+
+<ul>
+    {% if musician_list %}
+
+    {% for musician in musician_list %}
+
+    <li> <a href="{% url 'first_app:albulm_list' artist_id=musician.id %}">{{ musician.first_name }} {{ musician.last_name }}</a> </li>
+
+    <!-- Its important to note what is happening here, when ever we request for a page, the url handles such request for a
+    page and passes on that request as an arguement to the views in return rendering the requested html page, so here not
+    only are we requesting for a page we are also requesting for what should be shown in that page, that which we want
+    displayed on the page would have a key, and with that key we would start the chain of events from the template by 
+    declaring a variable attached to such key, passing on that variable as a request through the url, that takes the variable
+    to the views as an arguement and right there matches the variable arguement with the corresponding table object and shows
+    it on the corresponding html page... Hence the url not only handles the request of the page to be shown here to the view,
+    it also handles the request of the data to be shown here also to the view-->
+
+    {% endfor %}
+
+    {% else %}
+    <h3> No musician in the list </h3>
+    {% endif %}
+</ul>
+
+{% endblock %}
